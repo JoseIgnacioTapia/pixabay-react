@@ -1,1 +1,1 @@
-# Image seraching engine with React & Pixabay API
+# Image searching engine with React & Pixabay API
