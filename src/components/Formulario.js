@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Error from './Error';
 
-const Formulario = () => {
+const Formulario = ({guardarBusqueda}) => {
 
   // Guardar categoría buscada
   const [termino, guardarTermino] = useState('');
@@ -18,8 +18,8 @@ const Formulario = () => {
     guardarError(false);
 
     // Enviar el termino a App.js
+    guardarBusqueda(termino);
   }
-
 
   return (
     <form
