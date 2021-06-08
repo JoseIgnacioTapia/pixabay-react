@@ -1,10 +1,12 @@
 import Formulario from './components/Formulario';
+import ListadoImagenes from './components/ListadoImagenes';
 import {useState, useEffect} from 'react';
 
 function App() {
 
   // Guardar busqueda en el componente
   const [busqueda, guardarBusqueda] = useState('');
+  const [imagenes, listadoImagenes] = useState([]);
 
   // Consultar API cada vez que se modifique la búsqueda
   useEffect(() => {
@@ -17,7 +19,8 @@ function App() {
     
       const respuesta = await fetch(url);
       const resultado = await respuesta.json();
-      console.log(resultado.hits);
+
+      listadoImagenes(resultado.hits);
     }
 
     consultarAPI();
@@ -30,6 +33,12 @@ function App() {
 
         <Formulario 
           guardarBusqueda={guardarBusqueda}
+        />
+      </div>
+
+      <div className="row justify-content-center">
+        <ListadoImagenes 
+          imagenes={imagenes}
         />
       </div>
     </div>
