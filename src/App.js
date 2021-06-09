@@ -6,7 +6,10 @@ function App() {
 
   // Guardar busqueda en el componente
   const [busqueda, guardarBusqueda] = useState('');
+
   const [imagenes, listadoImagenes] = useState([]);
+  const [paginaactual, guardarPaginaActual] = useState(1);
+  const [totalpaginas, guardarTotalPaginas] = useState(1);
 
   // Consultar API cada vez que se modifique la búsqueda
   useEffect(() => {
@@ -21,6 +24,10 @@ function App() {
       const resultado = await respuesta.json();
 
       listadoImagenes(resultado.hits);
+
+      // Calcular el total de páginas
+      const calcularTotalPaginas = Math.ceil(resultado.totalHits / cantidad);
+      guardarTotalPaginas(calcularTotalPaginas);
     }
 
     consultarAPI();
