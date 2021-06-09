@@ -9,7 +9,7 @@ function App() {
 
   const [imagenes, listadoImagenes] = useState([]);
   const [paginaactual, guardarPaginaActual] = useState(1);
-  const [totalpaginas, guardarTotalPaginas] = useState(1);
+  const [totalpaginas, guardarTotalPaginas] = useState(0);
 
   // Consultar API cada vez que se modifique la búsqueda
   useEffect(() => {
@@ -33,6 +33,24 @@ function App() {
     consultarAPI();
   }, [busqueda])
 
+  // Definir la página anterior
+  const paginaAnterior = () => {
+    const nuevaPaginaActual = paginaactual - 1;
+
+    if(nuevaPaginaActual === 0) return; 
+
+    guardarPaginaActual(nuevaPaginaActual);
+  }
+
+  // Definir pagina siguiente
+  const paginaSiguiente = () => {
+    const nuevaPaginaActual = paginaactual + 1;
+
+    if(nuevaPaginaActual > totalpaginas) return;
+
+    guardarPaginaActual(nuevaPaginaActual);
+  }
+
   return (
     <div className="container">
       <div className="jumbotron">
@@ -47,6 +65,18 @@ function App() {
         <ListadoImagenes 
           imagenes={imagenes}
         />
+
+        <button
+          type="button"
+          className="bbtn btn-info mr-1"
+          onClick={paginaAnterior}
+        >&laquo; Anterior</button>
+
+        <button
+          type="button"
+          className="bbtn btn-info"
+          onClick={paginaSiguiente}
+        >Siguiente &raquo;</button>
       </div>
     </div>
   );
